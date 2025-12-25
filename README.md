@@ -1,1 +1,1 @@
-# wotd
+# motd
