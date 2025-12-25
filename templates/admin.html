@@ -1,34 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin - Daily Meanings</title>
 </head>
 <body>
-    <h1>Admin Panel - Word Management</h1>
-
-    <!-- Add New Word Form -->
-    <form method="POST" action="/add_word">
-        <input type="text" name="word" placeholder="Word" required>
-        <input type="text" name="meaning" placeholder="Meaning" required>
-        <button type="submit">Add Word</button>
-    </form>
-
-    <!-- Word List -->
-    <h2>Existing Words</h2>
+    <h1>Admin Panel</h1>
+    <h2>All Words</h2>
     <ul>
-        {% for word in words %}
-        <li>
-            <strong>{{ word.word }}</strong>: {{ word.meaning }}
-            <form method="POST" action="/delete_word/{{ word.id }}" style="display:inline;">
-                <button type="submit">Delete</button>
-            </form>
-        </li>
+        {% for w in words %}
+            <li>{{ w[1] }} — <b>{{ w[2] }}</b>: {{ w[3] }}</li>
         {% endfor %}
     </ul>
 
-    <a href="/">Back to Home</a>
+    <h3>Add Word</h3>
+    <form method="post">
+        <input type="hidden" name="action" value="add">
+        <label for="add-day">Day (YYYY-MM-DD):</label>
+        <input id="add-day" name="day" placeholder="YYYY-MM-DD" title="Day (YYYY-MM-DD)">
+        <label for="add-word">Word:</label>
+        <input id="add-word" name="word" placeholder="Enter word" title="Word">
+        <label for="add-meaning">Meaning:</label>
+        <input id="add-meaning" name="meaning" placeholder="Enter meaning" title="Meaning">
+        <button type="submit">Add</button>
+    </form>
+
+    <h3>Update Word</h3>
+    <form method="post">
+        <input type="hidden" name="action" value="update">
+        <label for="update-day">Day (YYYY-MM-DD):</label>
+        <input id="update-day" name="day" placeholder="YYYY-MM-DD" title="Day (YYYY-MM-DD)">
+        <label for="update-word">New Word:</label>
+        <input id="update-word" name="word" placeholder="Enter new word" title="New Word">
+        <label for="update-meaning">New Meaning:</label>
+        <input id="update-meaning" name="meaning" placeholder="Enter new meaning" title="New Meaning">
+        <button type="submit">Update</button>
+    </form>
+
+    <h3>Delete Word</h3>
+    <form method="post">
+        <input type="hidden" name="action" value="delete">
+        <label for="delete-day">Day (YYYY-MM-DD):</label>
+        <input id="delete-day" name="day" placeholder="YYYY-MM-DD" title="Day (YYYY-MM-DD)">
+        <button type="submit">Delete</button>
+    </form>
+
+    <h3>Delete Word</h3>
+    <form method="post">
+        <input type="hidden" name="action" value="delete">
+        Day (YYYY-MM-DD): <input name="day">
+        <button type="submit">Delete</button>
+    </form>
+
+    <p><a href="/">Back to Home</a></p>
 </body>
 </html>

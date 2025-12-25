@@ -1,28 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word of the Day</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Daily Meanings</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Word of the Day</h1>
-        <div class="word-box">
-            <h2 id="word">Loading...</h2>
-            <p id="meaning">Please wait...</p>
-        </div>
-    </div>
-
-    <script>
-        async function fetchWord() {
-            const response = await fetch("/api/word");
-            const data = await response.json();
-            document.getElementById("word").innerText = data.word;
-            document.getElementById("meaning").innerText = data.meaning;
-        }
-        fetchWord();
-    </script>
+    <h1>Daily Meanings</h1>
+    <ul>
+        {% for w in words %}
+            <li><b>{{ w[1] }}</b>: {{ w[2] }} — {{ w[3] }}</li>
+        {% endfor %}
+    </ul>
+    <p><a href="/admin">Go to Admin</a></p>
 </body>
 </html>
